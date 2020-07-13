@@ -24,6 +24,7 @@ export function PublicSettingsViewModel(settings) {
   this.AllowVolumeBrowserForRegularUsers = settings.AllowVolumeBrowserForRegularUsers;
   this.AllowDeviceMappingForRegularUsers = settings.AllowDeviceMappingForRegularUsers;
   this.AllowStackManagementForRegularUsers = settings.AllowStackManagementForRegularUsers;
+  this.AllowHostNamespaceForRegularUsers = settings.AllowHostNamespaceForRegularUsers;
   this.AuthenticationMethod = settings.AuthenticationMethod;
   this.EnableHostManagementFeatures = settings.EnableHostManagementFeatures;
   this.EnableEdgeComputeFeatures = settings.EnableEdgeComputeFeatures;

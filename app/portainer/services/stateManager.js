@@ -79,8 +79,8 @@ angular.module('portainer.app').factory('StateManager', [
     manager.updateAllowHostNamespaceForRegularUsers = function (allowHostNamespaceForRegularUsers) {
       state.application.allowHostNamespaceForRegularUsers = allowHostNamespaceForRegularUsers;
       LocalStorage.storeApplicationState(state.application);
-    }
-    
+    };
+
     manager.updateAllowDeviceMappingForRegularUsers = function updateAllowDeviceMappingForRegularUsers(allowDeviceMappingForRegularUsers) {
       state.application.allowDeviceMappingForRegularUsers = allowDeviceMappingForRegularUsers;
       LocalStorage.storeApplicationState(state.application);
@@ -88,6 +88,16 @@ angular.module('portainer.app').factory('StateManager', [
 
     manager.updateAllowStackManagementForRegularUsers = function updateAllowStackManagementForRegularUsers(allowStackManagementForRegularUsers) {
       state.application.allowStackManagementForRegularUsers = allowStackManagementForRegularUsers;
+      LocalStorage.storeApplicationState(state.application);
+    };
+
+    manager.updateAllowBindMountsForRegularUsers = function updateAllowBindMountsForRegularUsers(allowBindMountsForRegularUsers) {
+      state.application.allowBindMountsForRegularUsers = allowBindMountsForRegularUsers;
+      LocalStorage.storeApplicationState(state.application);
+    };
+
+    manager.updateAllowPrivilegedModeForRegularUsers = function (AllowPrivilegedModeForRegularUsers) {
+      state.application.allowPrivilegedModeForRegularUsers = AllowPrivilegedModeForRegularUsers;
       LocalStorage.storeApplicationState(state.application);
     };
 
@@ -101,6 +111,9 @@ angular.module('portainer.app').factory('StateManager', [
       state.application.enableEdgeComputeFeatures = settings.EnableEdgeComputeFeatures;
       state.application.allowDeviceMappingForRegularUsers = settings.AllowDeviceMappingForRegularUsers;
       state.application.allowStackManagementForRegularUsers = settings.AllowStackManagementForRegularUsers;
+      state.application.allowBindMountsForRegularUsers = settings.AllowBindMountsForRegularUsers;
+      state.application.allowPrivilegedModeForRegularUsers = settings.AllowPrivilegedModeForRegularUsers;
+      state.application.allowHostNamespaceForRegularUsers = settings.AllowHostNamespaceForRegularUsers;
       state.application.validity = moment().unix();
     }
 
