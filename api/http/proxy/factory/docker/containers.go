@@ -161,6 +161,7 @@ func (transport *Transport) decorateContainerCreationOperation(request *http.Req
 			Privileged bool          `json:"Privileged"`
 			PidMode    string        `json:"PidMode"`
 			Devices    []interface{} `json:"Devices"`
+			Binds      []string      `json:"Binds"`
 		} `json:"HostConfig"`
 	}
 
@@ -218,6 +219,10 @@ func (transport *Transport) decorateContainerCreationOperation(request *http.Req
 
 		if !settings.AllowDeviceMappingForRegularUsers && len(partialContainer.HostConfig.Devices) > 0 {
 			return nil, errors.New("forbidden to use device mapping")
+		}
+
+		if !settings.AllowBindMountsForRegularUsers && (len(partialContainer.HostConfig.Binds) > 0) {
+			return nil, errors.New("forbidden to use bind mounts")
 		}
 
 		request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
