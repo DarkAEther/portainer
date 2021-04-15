@@ -13,6 +13,7 @@ angular.module('portainer.docker').controller('ContainerLogsController', [
       lineCount: 100,
       sinceTimestamp: '',
       displayTimestamps: false,
+      containerRunning: true,
     };
 
     $scope.changeLogCollection = function (logCollectionStatus) {
@@ -69,19 +70,21 @@ angular.module('portainer.docker').controller('ContainerLogsController', [
         });
     }
 
-    function initView() {
+    this.$onInit = function () {
       HttpRequestHelper.setPortainerAgentTargetHeader($transition$.params().nodeName);
       ContainerService.container($transition$.params().id)
         .then(function success(data) {
           var container = data;
           $scope.container = container;
+          $scope.state.containerRunning = $scope.container.State.Running;
           startLogPolling(!container.Config.Tty);
+          if (!$scope.state.containerRunning) {
+            $scope.changeLogCollection(false);
+          }
         })
         .catch(function error(err) {
           Notifications.error('Failure', err, 'Unable to retrieve container information');
         });
-    }
-
-    initView();
+    };
   },
 ]);
